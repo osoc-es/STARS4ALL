@@ -1,4 +1,4 @@
-from importlib.metadata import files
+from importlib.metadata import files, metadata
 from importlib.resources import path
 from urllib import request
 from wsgiref import headers
@@ -6,9 +6,24 @@ import requests
 import json
 
 
-    #This funtion has the objetive to upload any file to an account at the zenodo repertory, using 
-    # the folowing funtions we are able to access the API and create a publication, editing it 
-    # who ever we want, and after that publishing it.
+#This funtion is used to produce a usefull metadata array needed for the Upload_zenodo funtion
+#able to edit at the will of the user.
+
+def Metadata_builder(Title, Description, name, Affiliation, type):
+    Data = {
+        metadata : {
+            'title' : Title,
+            'upload_type' : type,
+            'description' : Description,
+            'creators' : [{'name' : name, 'affiliation' : Affiliation}]
+        }
+    }
+    return Data
+
+
+#This funtion has the objetive to upload any file to an account at the zenodo repertory, using 
+# the folowing funtions we are able to access the API and create a publication, editing it 
+# who ever we want, and after that publishing it.
 
 
 def Upload_Zenodo(Token, Meta_Data, Path, Filename):
