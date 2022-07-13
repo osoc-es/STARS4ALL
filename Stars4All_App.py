@@ -9,7 +9,6 @@ Time = current_date_format()
 Access_Token = 'p25CSlnib5XnUTzEzgXNphLL4RzUwp23SF4YBhu8jMrq41xO5hboH6roEv1d'
 Filename = 'stars4all-%s' % Time
 Path = "C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\%s.csv" % Filename
-print(Filename)
 Title = 'Stars4ll_Tester'
 Description = 'Tester for Stars4All'
 name = 'Daniel Moreno'
@@ -25,4 +24,4 @@ meta_data = {
 
 def UPload_files():
     Upload_Zenodo(Access_Token, meta_data, Path, Filename)
-#UPload_files()
+UPload_files()
