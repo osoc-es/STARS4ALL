@@ -6,6 +6,7 @@ from Date_Creater import current_date_format
 import zipfile
 import shutil
 import os
+import Funciones_extración_datos
 
 
 Time = current_date_format()
@@ -57,6 +58,8 @@ def Delete_files():
     shutil.rmtree("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV\\Row")
 
 Create_Files()
+
+work_flow(inicio, final, "C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV\\Row")
 
 File_Zip(testeo)
 
