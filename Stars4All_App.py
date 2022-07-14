@@ -1,8 +1,11 @@
+from ast import Del
+from os import remove
 import CSV_ZENODO
 from CSV_ZENODO import Upload_Zenodo
 from Date_Creater import current_date_format
 import zipfile
 import shutil
+import os
 
 
 Time = current_date_format()
@@ -34,16 +37,31 @@ meta_data_Final = {
         'description': Description,
         'creators': [{'name': name,
                     'affiliation': Affiliation}] } }
+path_row = "C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV_Zip\\Stars4All-RowData-%s.zip" % testeo
+path_final = "C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV_Zip\\Stars4All-FinalData-%s.zip" % testeo
 
-path_row = "C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Testeos\\CSV_Zip\\Stars4All-RowData-%s" % testeo
-path_final = "C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Testeos\\CSV_Zip\\Stars4All-FinalData-%s" % testeo
+def Create_Files():
+    os.mkdir("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV\\Final")
+    os.mkdir("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV\\Row")
 
 def File_Zip(Filename):
-    shutil.make_archive("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Testeos\\CSV_Zip\\Stars4All-FinalData-%s" % Filename, "zip", "C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Testeos\\CSV\\Final")
-    shutil.make_archive("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Testeos\\CSV_Zip\\Stars4All-RowData-%s" % Filename, "zip", "C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Testeos\\CSV\\Row")
+    shutil.make_archive("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV_Zip\\Stars4All-FinalData-%s" % Filename, "zip", "C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Testeos\\CSV\\Final")
+    shutil.make_archive("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV_Zip\\Stars4All-RowData-%s" % Filename, "zip", "C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Testeos\\CSV\\Row")
 def UPload_files():
     Upload_Zenodo(Access_Token, meta_data_Row, path_row, Filename_Row)
     Upload_Zenodo(Access_Token, meta_data_Final, path_final, Filename_Final)
+
+def Delete_files():
+    remove("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV_Zip\\Stars4All-RowData-%s.zip" % testeo)
+    remove("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV_Zip\\Stars4All-FinalData-%s.zip" % testeo)
+    shutil.rmtree("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV\\Final")
+    shutil.rmtree("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV\\Row")
+
+Create_Files()
+
 File_Zip(testeo)
 
 UPload_files()
+
+Delete_files()
+
