@@ -51,7 +51,7 @@ meta_data_Mensual = {
 
 path_row = "C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV_Zip\\Star4All-RowData-%s.zip" % name
 path_final = "C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV_Zip\\Star4All-FinalData-%s.zip" % name
-path_mensual = "C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV\\%s.csv" % name
+path_mensual = "C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV" 
 
 def Create_Files():
     os.mkdir("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV\\Final")
@@ -75,7 +75,7 @@ def Delete_files(name):
 
 Create_Files()
 
-work_flow(inicio, final, "C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV\\Row")
+work_flow(inicio, final,"C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV"  ,"C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV\\Row")
 
 File_Zip(name)
 
