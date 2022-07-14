@@ -19,6 +19,7 @@ name= date_time_obj.strftime('%Y-%B')#Esto te debuelve el año y el mes de la fe
 Access_Token = 'p25CSlnib5XnUTzEzgXNphLL4RzUwp23SF4YBhu8jMrq41xO5hboH6roEv1d'
 Filename_Row = 'stars4all-Row-%s' % name
 Filename_Final = 'stars4all-Final-%s' % name
+Filename_Mensual = 'stars4all-mensual-%s' % name
 Title_Row = 'Stars4All_%s_Row' % name
 Title_Final = 'Stars4All_%s_Final' % name
 Title_Mensual = 'Stars4All_%s_Mensual' % name
@@ -63,7 +64,7 @@ def File_Zip(Filename):
 def UPload_files():
     Upload_Zenodo(Access_Token, meta_data_Row, path_row, Filename_Row)
     Upload_Zenodo(Access_Token, meta_data_Final, path_final, Filename_Final)
-    Upload_Zenodo(Access_Token, meta_data_Mensual, )
+    Upload_Zenodo(Access_Token, meta_data_Mensual, path_mensual, Filename_Mensual)
 
 def Delete_files(name):
     remove("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV_Zip\\Star4All-RowData-%s.zip" % name)
