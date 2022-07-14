@@ -1,26 +1,30 @@
 from ast import Del
+from datetime import date
 from os import remove
 import CSV_ZENODO
 from CSV_ZENODO import Upload_Zenodo
-from Date_Creater import current_date_format
 import zipfile
 import shutil
 import os
-import Funciones_extración_datos
+import datetime
+import Data_Extraction_funtions
+from Data_Extraction_funtions import work_flow
+from Data_Extraction_funtions import date_automathic
 
 
-Time = current_date_format()
+final , inicio = date_automathic()
+date_time_obj = datetime.strptime(inicio , '%Y-%m-%dT%H:%M:%SZ')
+name= date_time_obj.strftime('%Y-%B')#Esto te debuelve el año y el mes de la fecha de inicio que le pasas a la funcion
 
 Access_Token = 'p25CSlnib5XnUTzEzgXNphLL4RzUwp23SF4YBhu8jMrq41xO5hboH6roEv1d'
-Filename_Row = 'stars4all-Row-%s' % Time
-Filename_Final = 'stars4all-Final-%s' % Time
-Title_Row = 'Stars4ll_Tester_Row'
-Title_Final = 'Stars4ll_Tester_Final'
+Filename_Row = 'stars4all-Row-%s' % name
+Filename_Final = 'stars4all-Final-%s' % name
+Title_Row = 'Stars4ll_%s_Row' % Filename_Row
+Title_Final = 'Stars4ll_%s_Final' % Filename_Final
 Description = 'Tester for Stars4All'
 name = 'Daniel Moreno'
 Affiliation = 'OSOC'
 Type = 'poster'
-testeo = "test"
 
 meta_data_Row = {
      'metadata': {
@@ -37,8 +41,8 @@ meta_data_Final = {
         'description': Description,
         'creators': [{'name': name,
                     'affiliation': Affiliation}] } }
-path_row = "C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV_Zip\\Star4All-RowData-%s.zip" % testeo
-path_final = "C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV_Zip\\Star4All-FinalData-%s.zip" % testeo
+path_row = "C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV_Zip\\Star4All-RowData-%s.zip" % name
+path_final = "C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV_Zip\\Star4All-FinalData-%s.zip" % name
 
 def Create_Files():
     os.mkdir("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV\\Final")
@@ -51,19 +55,20 @@ def UPload_files():
     Upload_Zenodo(Access_Token, meta_data_Row, path_row, Filename_Row)
     Upload_Zenodo(Access_Token, meta_data_Final, path_final, Filename_Final)
 
-def Delete_files():
-    remove("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV_Zip\\Star4All-RowData-%s.zip" % testeo)
-    remove("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV_Zip\\Star4All-FinalData-%s.zip" % testeo)
+def Delete_files(name):
+    remove("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV_Zip\\Star4All-RowData-%s.zip" % name)
+    remove("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV_Zip\\Star4All-FinalData-%s.zip" % name)
     shutil.rmtree("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV\\Final")
     shutil.rmtree("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV\\Row")
+
 
 Create_Files()
 
 work_flow(inicio, final, "C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV\\Row")
 
-File_Zip(testeo)
+File_Zip(name)
 
 UPload_files()
 
-Delete_files()
+Delete_files(name) 
 
