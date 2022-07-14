@@ -13,7 +13,7 @@ def date_automathic():
     past_date_st= past_date.strftime('%Y-%m-%dT00:00:00Z')
     return(date_st, past_date_st)
 
-def work_flow(inicio,fin,path1,path2):
+def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con todos los fotometros y en el path 2 estan los fotometros por separados 
    
     def api_extraction(url):
 
@@ -113,7 +113,7 @@ def work_flow(inicio,fin,path1,path2):
         name1= str(name)+str(j)
         csv_generator(db_access(hostdb ,portdb,usernamedb,passworddb,database,inicio,fin,j),name1,j,dict,path1)
 
-    f2= open(path + '\\STARS4ALL'+str(name)+str('.csv'), "w") #Creamos el archivo y añadimos las cabeceras
+    f2= open(path2 + '\\STARS4ALL'+str(name)+str('.csv'), "w") #Creamos el archivo y añadimos las cabeceras
     f2.write('name , tamb , tsky , mag , tstamp , latitude , longitude'+'\n')
     f2.close()
     for j in usuarios:
