@@ -34,7 +34,7 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
     
     def db_access(hostdb ,portdb,usernamedb,passworddb,database,start,end,name): #Solo te devuelve los datos de un fotometro(user)
 
-        client = InfluxDBClient(host=hostdb, port=portdb, username=usernamedb, password=passworddb ,ssl=True, verify_ssl=True) #Accede a la base de datos mediante un cliente 
+        client = InfluxDBClient(host=hostdb, port=portdb, username=usernamedb, password=passworddb ,ssl=False, verify_ssl=False) #Accede a la base de datos mediante un cliente 
         client.switch_database(database)
         data_photometer=[]
         data_photometer = client.query("SELECT * FROM mqtt_consumer WHERE time >= '"+ start +"' AND time <= '"+ end +"' AND \"user\" = '"+ name +"'") # Nos devuelve los datosl fotometros
