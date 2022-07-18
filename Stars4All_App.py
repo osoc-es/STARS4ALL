@@ -1,5 +1,5 @@
 from ast import Del
-from datetime import date
+from datetime import datetime
 from os import remove
 import CSV_ZENODO
 from CSV_ZENODO import Upload_Zenodo
@@ -14,12 +14,12 @@ import sys
 
 #Pricipal Funtion, it iniciate all funtions and create all variables, 
 # it has the job to download the csv, filter them, create paths to save the data,
-#   and send them to the zenodo profile
+#  and send them to the zenodo profile
 
 def Stars4all_app(start, final):       
                                                      
     #This part creates a name out of the start time, so we can use it as title for the csv
-    date_time_obj = datetime.strptime(start , '%Y-%m-%dT%H:%M:%SZ')
+    date_time_obj = datetime.datetime.strptime(start , '%Y-%m-%dT%H:%M:%SZ')
     name= date_time_obj.strftime('%Y-%B')                
                                    
     #variables used for uploading the files to zenodo 
@@ -67,14 +67,14 @@ def Stars4all_app(start, final):
     #thi will help later to create zip files
 
     def Create_Files():
-        os.mkdir("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV\\Final")
-        os.mkdir("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV\\Row")
+        os.mkdir("/home/osoc22/Final")
+        os.mkdir("/home/osoc22/Raw")
 
     #This funtion transform the files created before to zip, so we can send them to zanodo more easelly
 
     def File_Zip(Filename):
-        shutil.make_archive("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV_Zip\\Star4All-FinalData-%s" % Filename, "zip", "C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV\\Final")
-        shutil.make_archive("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV_Zip\\Star4All-RowData-%s" % Filename, "zip", "C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV\\Row")
+        shutil.make_archive("/home/osoc22/Star4All-FinalData-%s" % Filename, ".zip", "/home/osoc22/Final")
+        shutil.make_archive("/home/osoc22/Star4All-RawData-%s" % Filename, ".zip", "/home/osoc22/Raw")
 
     #This funtion incorporate all the callings to the zenodo api to upload the files
 
@@ -87,27 +87,27 @@ def Stars4all_app(start, final):
     # this helps clean the computer and not stack unecessary data
 
     def Delete_files(name):
-        remove("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV_Zip\\Star4All-RowData-%s.zip" % name)
-        remove("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV_Zip\\Star4All-FinalData-%s.zip" % name)
-        shutil.rmtree("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV\\Final")
-        shutil.rmtree("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV\\Row")
-        remove("C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV\\%s.csv" % name)
+        remove("/home/osoc22/Star4All-RawData-%s.zip" % name)
+        remove("/home/osoc22/Star4All-FinalData-%s.zip" % name)
+        shutil.rmtree("/home/osoc22/Final")
+        shutil.rmtree("/home/osoc22/Raw")
+        remove("/home/osoc22/%s.csv" % name)
 
     #Calling of the funtion that creates the files for the CSV
-    Create_Files()                       
+    #Create_Files()                       
 
     #calling of the funtion that downloads the data from the data_base, and send it to the paths
-    work_flow(start, final,"C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV" ,"C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV\\Row")
+    work_flow(start, final,"/home/osoc22/Final" ,"/home/osoc22/Raw")
 
     #Calling of the funtion that transform the files to zips                                                                                
     File_Zip(name)                                             
 
     #creation of the path to the zips created before
-    path_row = "C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV_Zip\\Star4All-RowData-%s.zip" % name        
-    path_final = "C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV_Zip\\Star4All-FinalData-%s.zip" % name
+    path_row = "/home/osoc22/Star4All-RawData-%s.zip" % name        
+    path_final = "/home/osoc22/Star4All-FinalData-%s.zip" % name
 
     #Creation of the path for the mensual CSV
-    path_mensual = "C:\\Users\\Daniel Moreno\\Desktop\\Osoc-2022\\Star4All\\CSV"  
+    path_mensual = "/home/osoc22"  
 
     #Calling of the funtion that uploads the files to the zenodo account
     UPload_files()                                                     
