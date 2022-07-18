@@ -1,10 +1,12 @@
+from logging import exception
 from influxdb import InfluxDBClient
 import csv
-import time
+import configparser
 import requests
 from zipfile import ZipFile
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
+
 
 def date_automathic():
     date = datetime.today()
@@ -22,19 +24,67 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
        photometers_good_keys={}
        for i in posts:
         photometers_good_keys[i['name']] = i
-       return(photometers_good_keys)#Devuelve un diccionario una con los nombres como key , los values son los campos de la Api 
+     
+       if resp.status_code == 200:
+        return(photometers_good_keys)#Devuelve un diccionario una con los nombres como key , los values son los campos de la Api 
+       else:
+        exception("The conexion with the api has failed ")
+        raise
     
     def db_access(hostdb ,portdb,usernamedb,passworddb,database,start,end,name): #Solo te devuelve los datos de un fotometro(user)
 
         client = InfluxDBClient(host=hostdb, port=portdb, username=usernamedb, password=passworddb ,ssl=True, verify_ssl=True) #Accede a la base de datos mediante un cliente 
         client.switch_database(database)
         data_photometer=[]
-        data_photometer = client.query("SELECT * FROM brushEvents WHERE time >= '"+ start +"' AND time <= '"+ end +"' AND \"user\" = '"+ name +"'") # Nos devuelve los datosl fotometros
+        data_photometer = client.query("SELECT * FROM mqtt_consumer WHERE time >= '"+ start +"' AND time <= '"+ end +"' AND \"user\" = '"+ name +"'") # Nos devuelve los datosl fotometros
          #con el nombre de user y metiendo la fecha de inicio y de fin
         data_photometer=list(data_photometer)[0]
         return(data_photometer)  #Devuelve los el apartado fields de los objetos en influxdb
 
     def csv_generator(data,name,user,dict,path): #Los datos deben ser de un solo fotometro (user) para añadir una cabecera con datos especificos 
+       if 'tester' in dict[user].keys():
+        test=dict[user]['tester']
+       else:
+        test='NoInf'
+
+       if 'info_location' in dict[user].keys():
+        if 'country' in  dict[user]['info_location'].keys():
+            country=[user]['info_location']['country']
+        else:
+            country='NoInf'
+
+        if 'region' in  dict[user]['info_location'].keys():
+            region=[user]['info_location']['region']
+        else:
+            region='NoInf'
+
+        if 'town' in  dict[user]['info_location'].keys():
+            town=[user]['info_location']['town']
+        else:
+            town='NoInf'
+
+        if 'place' in  dict[user]['info_location'].keys():
+            place=[user]['info_location']['place']
+        else:
+            place='NoInf'
+
+        if 'latitude' in  dict[user]['info_location'].keys():
+            latitude=[user]['info_location']['latitude']
+        else:
+            latitude='NoInf'
+
+        if 'longitude' in  dict[user]['info_location'].keys():
+            longitude=[user]['info_location']['longitude']
+        else:
+            longitude='NoInf'
+       else:
+        country='NoInf'
+        region='NoInf'
+        town='NoInf'
+        place='NoInf'
+        latitude='NoInf'
+        longitude='NoInf'
+        
         headers =[
       "# Community Standard Skyglow Data Format 1.0",
 '# URL: https://www.darksky.org/wp-content/uploads/bsk-pdf-manager/47_SKYGLOW_DEFINITIONS.PDF',
@@ -43,9 +93,9 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
 '# Device type: SQM-LE',
 '# Instrument ID: Dahlem_tower_le',
 #Aquí abajo añadimos a la cabecera la información correspondiente a su usuario en la Api
-'# Data supplier: '+ str(dict[user]['tester'])+',https://api.stars4all.eu/photometers'
-'# Location name: '+str( dict[user]['info_location']['country'])+'-'+str( dict[user]['info_location']['region'])+'-'+str( dict[user]['info_location']['town'])+'-'+str( dict[user]['info_location']['place']),
-'# Position (lat, lon, elev(m)):'+str( dict[user]['info_location']['latitude'])+','+str( dict[user]['info_location']['longitude']) ,
+'# Data supplier: '+ test+',https://api.stars4all.eu/photometers'
+'# Location name: '+country+'-'+region+'-'+ town+'-'+place,
+'# Position (lat, lon, elev(m)):'+latitude+','+longitude ,
 '# Local timezone: ',
 '# Time Synchronization: GPS',
 '# Moving / Stationary position: STATIONARY',
@@ -73,14 +123,14 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
 '# YYYY-MM-DDTHH:mm:ss.fff;YYYY-MM-DDTHH:mm:ss.fff;Celsius;number;Hz;mag/arcsec^2',
 '# END OF HEADER']
 
-        f=  open(path + '\\STARS4ALL'+str(name)+str('.csv'), mode='w') #Creamos el archivo y añadimos las cabeceras
+        f=  open(path + '\STARS4ALL'+str(name)+str('.csv'), mode='w') #Creamos el archivo y añadimos las cabeceras
         for i in headers:
             f.write(i +'\n')
         f.close()
-        with open(path + '\\STARS4ALL'+str(name)+str('.csv'), mode='w',newline= '') as File: #Añadimos los parametros 
+        with open(path + '\STARS4ALL'+str(name)+str('.csv'), mode='w',newline= '') as File: #Añadimos los parametros 
             writer = csv.writer(File)
             writer.writerow(['name , tamb , tsky , mag , tstamp , latitude , longitude'])    
-            keys=['name','tamb','tsky','mag','tstamp','latitude','longitude']
+            keys=['name','tamb','tsky','mag','tstamp']
         for i in data:
             writer.writerow([i[k]for k in keys]) 
 
@@ -92,9 +142,9 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
             data[i]['latitude']=dict[data[i]['user']]['latitude'] #Añadimos el apartado de latitud correspondiente al fotometro
             data[i]['longitude']=dict[data[i]['user']]['longitude'] #Añadimos el apartado de longitud correspondiente al fotometro
 
-        with open(path + '\\STARS4ALL'+str(name)+str('.csv'), mode='w',newline= '') as File: #Añadimos los parametros 
+        with open(path + '\STARS4ALL'+str(name)+str('.csv'), mode='w',newline= '') as File: #Añadimos los parametros 
             writer = csv.writer(File)   
-            keys=['name','tamb','tsky','mag','tstamp','latitude','longitude']
+            keys=['name','tamb','tsky','mag','tstamp']
             for i in data:
                 writer.writerow([i[k]for k in keys])
             writer.close()
@@ -106,14 +156,24 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
     for i in api_extraction('https://api.stars4all.eu/photometers'):
         usuarios.append(i)
 
-    date_time_obj = datetime.strptime(inicio , '%Y-%m-%dT%H:%M:%SZ')
+    date_time_obj = datetime.strptime(inicio ,'%Y-%m-%dT%H:%M:%SZ')
     name= date_time_obj.strftime('%Y-%B')
+
+    import configparser
+
+    config = configparser.ConfigParser()
+    config.read('variable.conf')
+    hostdb = config.get('HOST', 'hostdb')
+    portdb=config.get('HOST', 'portdb')
+    usernamedb=config.get('HOST', 'usernamedb')
+    passworddb=config.get('HOST', 'usernamedb')
+    database=config.get('HOST', 'database')
 
     for j in usuarios:
         name1= str(name)+str(j)
         csv_generator(db_access(hostdb ,portdb,usernamedb,passworddb,database,inicio,fin,j),name1,j,dict,path1)
 
-    f2= open(path2 + '\\STARS4ALL'+str(name)+str('.csv'), "w") #Creamos el archivo y añadimos las cabeceras
+    f2= open(path2 + '\STARS4ALL'+str(name)+str('.csv'), "w") #Creamos el archivo y añadimos las cabeceras
     f2.write('name , tamb , tsky , mag , tstamp , latitude , longitude'+'\n')
     f2.close()
     for j in usuarios:
