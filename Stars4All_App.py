@@ -1,5 +1,5 @@
 from ast import Del
-from datetime import date
+from datetime import datetime
 from os import remove
 import CSV_ZENODO
 from CSV_ZENODO import Upload_Zenodo
@@ -14,7 +14,7 @@ import sys
 
 #Pricipal Funtion, it iniciate all funtions and create all variables, 
 # it has the job to download the csv, filter them, create paths to save the data,
-#   and send them to the zenodo profile
+#  and send them to the zenodo profile
 
 def Stars4all_app(start, final):       
                                                      
