@@ -37,7 +37,7 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
         client = InfluxDBClient(host=hostdb, port=portdb, username=usernamedb, password=passworddb ,ssl=False, verify_ssl=False) #Accede a la base de datos mediante un cliente 
         client.switch_database(database)
         data_photometer=[]
-        data_photometer = client.query("SELECT * FROM mqtt_consumer WHERE time >= '"+ start +"' AND time <= '"+ end +"' AND \"user\" = '"+ name +"'") # Nos devuelve los datosl fotometros
+        data_photometer = client.query("SELECT * FROM mqtt_consumer WHERE time >= '"+ start +"' AND time <= '"+ end +"' AND \"name\" = '"+ name +"'") # Nos devuelve los datosl fotometros
          #con el nombre de user y metiendo la fecha de inicio y de fin
         data_photometer=list(data_photometer)[0]
         return(data_photometer)  #Devuelve los el apartado fields de los objetos en influxdb
@@ -164,7 +164,7 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
 
     config = configparser.ConfigParser()
     config.read('variable.conf')
-    hostdb = config.get('HOST', 'hostdb')
+    hostdb = config.get('HOST', 'hostdb').strip()
     portdb=config.get('HOST', 'portdb')
     usernamedb=config.get('HOST', 'usernamedb')
     passworddb=config.get('HOST', 'usernamedb')
