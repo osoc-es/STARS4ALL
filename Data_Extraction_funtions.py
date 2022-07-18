@@ -96,7 +96,7 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
 #Aquí abajo añadimos a la cabecera la información correspondiente a su usuario en la Api
 '# Data supplier: '+ test+',https://api.stars4all.eu/photometers'
 '# Location name: '+country+'-'+region+'-'+ town+'-'+place,
-'# Position (lat, lon, elev(m)):'+latitude+','+longitude ,
+'# Position (lat, lon, elev(m)):'+str(latitude)+','+str(longitude) ,
 '# Local timezone: ',
 '# Time Synchronization: GPS',
 '# Moving / Stationary position: STATIONARY',
@@ -128,9 +128,9 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
         for i in headers:
             f.write(i +'\n')
         f.close()
-        with open(path + '\STARS4ALL'+str(name)+str('.csv'), mode='w',newline= '') as File: #Añadimos los parametros 
+        with open(path + '\STARS4ALL'+str(name)+str('.csv'), mode='a',newline= '') as File: #Añadimos los parametros 
             writer = csv.writer(File)
-            writer.writerow(['name , tamb , tsky , mag , tstamp '])    
+            writer.writerow(['name , tamb , tsky , mag , time '])    
             keys=['name','tamb','tsky','mag','tstamp']
             for i in data:
                 writer.writerow([i[k]for k in keys]) 
@@ -143,9 +143,9 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
             data[i]['latitude']=dict[data[i]['user']]['latitude'] #Añadimos el apartado de latitud correspondiente al fotometro
             data[i]['longitude']=dict[data[i]['user']]['longitude'] #Añadimos el apartado de longitud correspondiente al fotometro
 
-        with open(path + '\STARS4ALL'+str(name)+str('.csv'), mode='w',newline= '') as File: #Añadimos los parametros 
+        with open(path +  'STARS4ALL-'+str(name)+'-'+str('.csv'), mode='w',newline= '') as File: #Añadimos los parametros 
             writer = csv.writer(File)   
-            keys=['name','tamb','tsky','mag','tstamp']
+            keys=['name','tamb','tsky','mag','time']
             for i in data:
                 writer.writerow([i[k]for k in keys])
             writer.close()
@@ -174,7 +174,7 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
         name1= str(name)+str(j)
         csv_generator(db_access(hostdb ,portdb,usernamedb,passworddb,database,inicio,fin,j),name1,j,dict,path1)
 
-    f2= open(path2 + '\STARS4ALL'+str(name)+str('.csv'), "w") #Creamos el archivo y añadimos las cabeceras
+    f2= open(path2 + 'STARS4ALL-'+str(name)+'-'+ str('.csv'), "w") #Creamos el archivo y añadimos las cabeceras
     f2.write('name , tamb , tsky , mag , tstamp , latitude , longitude'+'\n')
     f2.close()
     for j in usuarios:
