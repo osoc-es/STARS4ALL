@@ -49,32 +49,32 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
 
        if 'info_location' in dict[user].keys():
         if 'country' in  dict[user]['info_location'].keys():
-            country=[user]['info_location']['country']
+            country=dict[user]['info_location']['country']
         else:
             country='NoInf'
 
         if 'region' in  dict[user]['info_location'].keys():
-            region=[user]['info_location']['region']
+            region=dict[user]['info_location']['region']
         else:
             region='NoInf'
 
         if 'town' in  dict[user]['info_location'].keys():
-            town=[user]['info_location']['town']
+            town=dict[user]['info_location']['town']
         else:
             town='NoInf'
 
         if 'place' in  dict[user]['info_location'].keys():
-            place=[user]['info_location']['place']
+            place=dict[user]['info_location']['place']
         else:
             place='NoInf'
 
         if 'latitude' in  dict[user]['info_location'].keys():
-            latitude=[user]['info_location']['latitude']
+            latitude=dict[user]['info_location']['latitude']
         else:
             latitude='NoInf'
 
         if 'longitude' in  dict[user]['info_location'].keys():
-            longitude=[user]['info_location']['longitude']
+            longitude=dict[user]['info_location']['longitude']
         else:
             longitude='NoInf'
        else:
