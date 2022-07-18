@@ -6,6 +6,7 @@ import requests
 from zipfile import ZipFile
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
+import sys
 
 
 def date_automathic():
@@ -178,3 +179,6 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
     f2.close()
     for j in usuarios:
         csv_generator2(db_access(hostdb ,portdb,usernamedb,passworddb,database,inicio,fin,j),name,dict,path2)
+
+if __name__ == "__main__":
+    work_flow(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4])
