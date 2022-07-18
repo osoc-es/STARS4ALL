@@ -43,48 +43,48 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
         return(data_photometer)  #Devuelve los el apartado fields de los objetos en influxdb
 
     def csv_generator(data,name,user,dict,path): #Los datos deben ser de un solo fotometro (user) para añadir una cabecera con datos especificos 
-       if 'tester' in dict[user].keys():
-        test=dict[user]['tester']
-       else:
-        test='NoInf'
+        if 'tester' in dict[user].keys():
+            test=dict[user]['tester']
+        else:
+            test='NoInf'
 
-       if 'info_location' in dict[user].keys():
-        if 'country' in  dict[user]['info_location'].keys():
-            country=dict[user]['info_location']['country']
+        if 'info_location' in dict[user].keys():
+            if 'country' in  dict[user]['info_location'].keys():
+                country=dict[user]['info_location']['country']
+            else:
+                country='NoInf'
+
+            if 'region' in  dict[user]['info_location'].keys():
+                region=dict[user]['info_location']['region']
+            else:
+                region='NoInf'
+
+            if 'town' in  dict[user]['info_location'].keys():
+                town=dict[user]['info_location']['town']
+            else:
+                town='NoInf'
+
+            if 'place' in  dict[user]['info_location'].keys():
+                place=dict[user]['info_location']['place']
+            else:
+                place='NoInf'
+
+            if 'latitude' in  dict[user]['info_location'].keys():
+                latitude=dict[user]['info_location']['latitude']
+            else:
+                latitude='NoInf'
+
+            if 'longitude' in  dict[user]['info_location'].keys():
+                longitude=dict[user]['info_location']['longitude']
+            else:
+                longitude='NoInf'
         else:
             country='NoInf'
-
-        if 'region' in  dict[user]['info_location'].keys():
-            region=dict[user]['info_location']['region']
-        else:
             region='NoInf'
-
-        if 'town' in  dict[user]['info_location'].keys():
-            town=dict[user]['info_location']['town']
-        else:
             town='NoInf'
-
-        if 'place' in  dict[user]['info_location'].keys():
-            place=dict[user]['info_location']['place']
-        else:
             place='NoInf'
-
-        if 'latitude' in  dict[user]['info_location'].keys():
-            latitude=dict[user]['info_location']['latitude']
-        else:
             latitude='NoInf'
-
-        if 'longitude' in  dict[user]['info_location'].keys():
-            longitude=dict[user]['info_location']['longitude']
-        else:
             longitude='NoInf'
-       else:
-        country='NoInf'
-        region='NoInf'
-        town='NoInf'
-        place='NoInf'
-        latitude='NoInf'
-        longitude='NoInf'
         
         headers =[
       "# Community Standard Skyglow Data Format 1.0",
@@ -130,10 +130,10 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
         f.close()
         with open(path + '\STARS4ALL'+str(name)+str('.csv'), mode='w',newline= '') as File: #Añadimos los parametros 
             writer = csv.writer(File)
-            writer.writerow(['name , tamb , tsky , mag , tstamp , latitude , longitude'])    
+            writer.writerow(['name , tamb , tsky , mag , tstamp '])    
             keys=['name','tamb','tsky','mag','tstamp']
-        for i in data:
-            writer.writerow([i[k]for k in keys]) 
+            for i in data:
+                writer.writerow([i[k]for k in keys]) 
 
     def csv_generator2(data,name,dict,path): #Los datos deben ser de todos los usuarios(data)
 
