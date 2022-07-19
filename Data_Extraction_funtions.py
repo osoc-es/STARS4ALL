@@ -37,9 +37,9 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
         client = InfluxDBClient(host=hostdb, port=portdb, username=usernamedb, password=passworddb ,ssl=False, verify_ssl=False) #Accede a la base de datos mediante un cliente 
         client.switch_database(database)
         data_photometer=[]
-        data_photometer = client.query("SELECT * FROM mqtt_consumer WHERE time >= '"+ start +"' AND time <= '"+ end +"' AND \"name\" = '"+ name +"'") # Nos devuelve los datosl fotometros
+        data_photometer = client.query("SELECT * FROM mqtt_consumer WHERE time > '"+ start +"' AND time <= '"+ end +"' AND \"name\" = '"+ name +"'") # Nos devuelve los datosl fotometros
          #con el nombre de user y metiendo la fecha de inicio y de fin
-        data_photometer=list(data_photometer)[0]
+        data_photometer=list(data_photometer)
         return(data_photometer)  #Devuelve los el apartado fields de los objetos en influxdb
 
     def csv_generator(data,name,user,dict,path): #Los datos deben ser de un solo fotometro (user) para añadir una cabecera con datos especificos 
@@ -124,17 +124,17 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
 '# YYYY-MM-DDTHH:mm:ss.fff;YYYY-MM-DDTHH:mm:ss.fff;Celsius;number;Hz;mag/arcsec^2',
 '# END OF HEADER']
 
-        f=  open(path + '\STARS4ALL'+str(name)+str('.csv'), mode='w') #Creamos el archivo y añadimos las cabeceras
+        f=  open(path + 'STARS4ALL'+str(name)+str('.csv'), mode='w') #Creamos el archivo y añadimos las cabeceras
         for i in headers:
             f.write(i +'\n')
         f.close()
-        with open(path + '\STARS4ALL'+str(name)+str('.csv'), mode='a',newline= '') as File: #Añadimos los parametros 
+        with open(path + 'STARS4ALL'+str(name)+str('.csv'), mode='a',newline= '') as File: #Añadimos los parametros 
             writer = csv.writer(File)
-            writer.writerow(['name , tamb , tsky , mag , time '])    
-            keys=['name','tamb','tsky','mag','tstamp']
+            writer.writerow(['name , tamb , tsky , mag , tstamp '])    
+            keys=['name','tamb','tsky','mag','time']
             for i in data:
-                writer.writerow([i[k]for k in keys]) 
-
+                for count in i:
+                    writer.writerow([count[k]for k in keys])
     def csv_generator2(data,name,dict,path): #Los datos deben ser de todos los usuarios(data)
 
         writer.writerow(['name , tamb , tsky , mag , tstamp , latitude , longitude'])    
@@ -147,7 +147,8 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
             writer = csv.writer(File)   
             keys=['name','tamb','tsky','mag','time']
             for i in data:
-                writer.writerow([i[k]for k in keys])
+                for count in i:
+                    writer.writerow([count[k]for k in keys])
             writer.close()
 
 
