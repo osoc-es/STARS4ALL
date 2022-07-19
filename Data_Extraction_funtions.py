@@ -135,9 +135,7 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
             for i in data:
                 for count in i:
                     writer.writerow([count[k]for k in keys])
-    def csv_generator2(data,name,dict,path): #Los datos deben ser de todos los usuarios(data)
-
-        writer.writerow(['name , tamb , tsky , mag , tstamp , latitude , longitude'])    
+    def csv_generator2(data,name,dict,path): #Los datos deben ser de todos los usuarios(data)    
 
         for i in range(len(data)):
             data[i]['latitude']=dict[data[i]['user']]['latitude'] #Añadimos el apartado de latitud correspondiente al fotometro
