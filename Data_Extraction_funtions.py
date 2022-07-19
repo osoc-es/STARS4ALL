@@ -136,10 +136,11 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
                 for count in i:
                     writer.writerow([count[k]for k in keys])
     def csv_generator2(data,name,dict,path): #Los datos deben ser de todos los usuarios(data)    
-        data=data[0]
+        
         for i in range(len(data)):
-            data[i]['latitude']=dict[data[i]['user']]["info_location"]['latitude'] #Añadimos el apartado de latitud correspondiente al fotometro
-            data[i]['longitude']=dict[data[i]['user']]["info_location"]['longitude'] #Añadimos el apartado de longitud correspondiente al fotometro
+            #data[i]['latitude']=dict[data[i]['user']]["info_location"]['latitude'] #Añadimos el apartado de latitud correspondiente al fotometro
+            #data[i]['longitude']=dict[data[i]['user']]["info_location"]['longitude'] #Añadimos el apartado de longitud correspondiente al fotometro
+            print(data[i])
 
         with open(path +  'STARS4ALL-'+str(name)+'-'+str('.csv'), mode='a',newline= '') as File: #Añadimos los parametros 
             writer = csv.writer(File)   
