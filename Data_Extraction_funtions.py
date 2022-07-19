@@ -171,7 +171,7 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
 
     for j in usuarios:
         name1= str(name)+str(j)
-        #csv_generator(db_access(hostdb ,portdb,usernamedb,passworddb,database,inicio,fin,j),name1,j,dict,path1)
+        csv_generator(db_access(hostdb ,portdb,usernamedb,passworddb,database,inicio,fin,j),name1,j,dict,path1)
         print( 'Generating csv file for' + j )
 
     f2= open(path2 + 'STARS4ALL-'+str(name)+'-'+ str('.csv'), "w") #Creamos el archivo y añadimos las cabeceras
