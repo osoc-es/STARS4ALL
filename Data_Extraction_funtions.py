@@ -142,7 +142,7 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
                 count['latitude']=dict[count['name']]["info_location"]['latitude'] #Añadimos el apartado de latitud correspondiente al fotometro
                 count['longitude']=dict[count['name']]["info_location"]['longitude'] #Añadimos el apartado de longitud correspondiente al fotometro
 
-        with open(path +  'STARS4ALL-'+str(name)+'-'+str('.csv'), mode='a',newline= '') as File: #Añadimos los parametros 
+        with open(path +  'STARS4ALL-'+str(name)+str('.csv'), mode='a',newline= '') as File: #Añadimos los parametros 
             writer = csv.writer(File)   
             keys=['name','tamb','tsky','mag','time','latitude','longitude']
             for i in data:
@@ -172,7 +172,6 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
     for j in usuarios:
         name1= str(name)+str(j)
         csv_generator(db_access(hostdb ,portdb,usernamedb,passworddb,database,inicio,fin,j),name1,j,dict,path1)
-        print( 'Generating csv file for' + j )
 
     f2= open(path2 + 'STARS4ALL-'+str(name)+'-'+ str('.csv'), "w") #Creamos el archivo y añadimos las cabeceras
     f2.write('name , tamb , tsky , mag , tstamp , latitude , longitude'+'\n')
