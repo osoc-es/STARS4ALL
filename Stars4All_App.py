@@ -11,6 +11,7 @@ import Data_Extraction_funtions
 from Data_Extraction_funtions import work_flow
 from Data_Extraction_funtions import date_automathic
 import sys
+from Stars4all import stars4all_filtrado
 
 #Pricipal Funtion, it iniciate all funtions and create all variables, 
 # it has the job to download the csv, filter them, create paths to save the data,
@@ -23,7 +24,7 @@ def Stars4all_app(start, final):
     name= date_time_obj.strftime('%Y-%B')                
                                    
     #variables used for uploading the files to zenodo 
-    Access_Token = 'p25CSlnib5XnUTzEzgXNphLL4RzUwp23SF4YBhu8jMrq41xO5hboH6roEv1d'          
+    Access_Token = 'ozd6VtnQ7KLXheLIlCK6s8m1nf1RLYt9ebPgLXKgojxd2li52AHexYASMeQ3'          
     Filename_Row = 'stars4all-Row-%s' % name
     Filename_Final = 'stars4all-Final-%s' % name
     Filename_Mensual = 'stars4all-mensual-%s' % name
@@ -94,10 +95,13 @@ def Stars4all_app(start, final):
         remove("/home/osoc22/%s.csv" % name)
 
     #Calling of the funtion that creates the files for the CSV
-    #Create_Files()                       
+    #create_Files()                       
 
     #calling of the funtion that downloads the data from the data_base, and send it to the paths
-    work_flow(start, final,"/home/osoc22/Final" ,"/home/osoc22/Raw")
+    work_flow(start, final,"/home/osoc22" ,"/home/osoc22/Raw")
+    contenido = os.listdir('/home/osoc22/Raw')
+    for i in contenido:
+        stars4all_filtrado( i, "/home/osoc22/Final")
 
     #Calling of the funtion that transform the files to zips                                                                                
     File_Zip(name)                                             
@@ -121,10 +125,8 @@ def Stars4all_app(start, final):
 #This part allows us to choose if we want to Call the funtion automatic or manual, 
 # in case it doesnt work automatic
 
-if(len(sys.argv) == 2):
-    Stars4all_app(sys.argv[0], sys.argv[1])
+if(len(sys.argv) == 3):
+    Stars4all_app(sys.argv[1], sys.argv[2])
 else:
     final_automatic , start_automatic = date_automathic()
     Stars4all_app(start_automatic, final_automatic)
-
-
