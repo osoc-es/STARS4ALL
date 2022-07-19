@@ -139,13 +139,12 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
         
         for i in data:
             for count in i:
-            #data[i]['latitude']=dict[data[i]['user']]["info_location"]['latitude'] #Añadimos el apartado de latitud correspondiente al fotometro
-            #data[i]['longitude']=dict[data[i]['user']]["info_location"]['longitude'] #Añadimos el apartado de longitud correspondiente al fotometro
-                print(count)
+                data[i]['latitude']=dict[data[i]['user']]["info_location"]['latitude'] #Añadimos el apartado de latitud correspondiente al fotometro
+                data[i]['longitude']=dict[data[i]['user']]["info_location"]['longitude'] #Añadimos el apartado de longitud correspondiente al fotometro
 
         with open(path +  'STARS4ALL-'+str(name)+'-'+str('.csv'), mode='a',newline= '') as File: #Añadimos los parametros 
             writer = csv.writer(File)   
-            keys=['name','tamb','tsky','mag','time', 'latitude','longitude']
+            keys=['name','tamb','tsky','mag','time','latitude','longitude']
             for i in data:
                 for count in i:
                     writer.writerow([count[k]for k in keys])
