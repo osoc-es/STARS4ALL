@@ -139,7 +139,7 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
         
         for i in data:
             for count in i:
-                count['latitude']=dict[count]['user']["info_location"]['latitude'] #Añadimos el apartado de latitud correspondiente al fotometro
+                count['latitude']=dict[count['user']]["info_location"]['latitude'] #Añadimos el apartado de latitud correspondiente al fotometro
                 count['longitude']=dict[count['user']]["info_location"]['longitude'] #Añadimos el apartado de longitud correspondiente al fotometro
 
         with open(path +  'STARS4ALL-'+str(name)+'-'+str('.csv'), mode='a',newline= '') as File: #Añadimos los parametros 
