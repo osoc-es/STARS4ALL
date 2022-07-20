@@ -75,8 +75,8 @@ def Stars4all_app(start, final):
     #This funtion transform the files created before to zip, so we can send them to zanodo more easelly
 
     def File_Zip(Filename):
-        shutil.make_archive("/home/osoc22/Star4All-FinalData-%s" % Filename, ".zip", "/home/osoc22/Final")
-        shutil.make_archive("/home/osoc22/Star4All-RawData-%s" % Filename, ".zip", "/home/osoc22/Raw")
+        shutil.make_archive("/home/osoc22/Star4All-FinalData-%s" % Filename, "zip", "/home/osoc22/Final")
+        shutil.make_archive("/home/osoc22/Star4All-RawData-%s" % Filename, "zip", "/home/osoc22/Raw")
 
     #This funtion incorporate all the callings to the zenodo api to upload the files
 
