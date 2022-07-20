@@ -106,7 +106,7 @@ def Stars4all_app(start, final):
     #for i in contenido:
         #print(i)
         #stars4all_filtrado('/home/osoc22/Raw/'+ i, "/home/osoc22/Final")
-    stars4all_filtrado('/home/osoc22/'+ name +'.csv', '/home/osoc22/Final')    
+    stars4all_filtrado('/home/osoc22/'+'STRARS4ALL'+ name +'.csv', '/home/osoc22/Final')    
     print('Se genera los dataset filtrado')
 
     #Calling of the funtion that transform the files to zips                                                                                
