@@ -126,6 +126,7 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
         f=  open(path + 'STARS4ALL'+str(name)+str('.csv'), mode='w') #Creamos el archivo y añadimos las cabeceras
         for i in headers:
             f.write(i +'\n')
+        f.close()
         with open(path + 'STARS4ALL'+str(name)+str('.csv'), mode='a',newline= '') as File: #Añadimos los parametros 
             writer = csv.writer(File)
             writer.writerow(['name,tamb,tsky,mag,tstamps'])    
@@ -133,7 +134,7 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
             for i in data:
                 for count in i:
                     writer.writerow([count[k]for k in keys])
-
+                    
     def csv_generator2(data,name,dict,path): #Los datos deben ser de todos los usuarios(data)    
         
         for i in data:
@@ -146,7 +147,9 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
             keys=['name','tamb','tsky','mag','time','latitude','longitude']
             for i in data:
                 for count in i:
-                    writer.writerow([count[k]for k in keys])
+                    for k in keys:
+                        writer.writerow([count[k]for k in keys])
+                        print(count[k])
 
 
     dict= api_extraction('https://api.stars4all.eu/photometers')
