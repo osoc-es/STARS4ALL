@@ -93,7 +93,7 @@ def Stars4all_app(start, final):
         remove("/home/osoc22/Star4All-FinalData-%s.zip" % name)
         shutil.rmtree("/home/osoc22/Final")
         shutil.rmtree("/home/osoc22/Raw")
-        remove("/home/osoc22/%s.csv" % name)
+        remove("/home/osoc22/STARS4ALL-%s.csv" % name)
 
     #Calling of the funtion that creates the files for the CSV
     Create_Files()                       
