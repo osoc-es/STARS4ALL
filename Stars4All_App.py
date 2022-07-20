@@ -7,11 +7,12 @@ import zipfile
 import shutil
 import os
 import datetime
-import Data_Extraction_funtions
 from Data_Extraction_funtions import work_flow
 from Data_Extraction_funtions import date_automathic
 import sys
 from Stars4all import stars4all_filtrado
+from datetime import datetime
+
 
 #Pricipal Funtion, it iniciate all funtions and create all variables, 
 # it has the job to download the csv, filter them, create paths to save the data,
@@ -98,7 +99,7 @@ def Stars4all_app(start, final):
     #create_Files()                       
 
     #calling of the funtion that downloads the data from the data_base, and send it to the paths
-    work_flow(start, final,"/home/osoc22" ,"/home/osoc22/Raw")
+    work_flow(start, final,"/home/osoc22/" ,"/home/osoc22/Raw/")
     print('Se genera los dataset raw')
     contenido = os.listdir('/home/osoc22/Raw')
     for i in contenido:
