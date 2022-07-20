@@ -173,7 +173,7 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
         csv_generator(db_access(hostdb ,portdb,usernamedb,passworddb,database,inicio,fin,j),name1,j,dict,path1)
 
     f2= open(path2 + 'STARS4ALL-'+str(name)+ str('.csv'), "w") #Creamos el archivo y añadimos las cabeceras
-    f2.write('name , tamb , tsky , mag , tstamp , latitude , longitude'+'\n')
+    f2.write('name,tamb,tsky,mag,tstamp,latitude,longitude'+'\n')
     f2.close()
     for j in usuarios:
         csv_generator2(db_access(hostdb ,portdb,usernamedb,passworddb,database,inicio,fin,j),name,dict,path2)
