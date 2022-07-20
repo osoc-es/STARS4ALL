@@ -79,7 +79,7 @@ def moon_altitude(dataframe, i):
 
 
 def month(dataframe):
-    middle = len(dataframe) / 2
+    middle = len(dataframe) // 2
     year = data_to_date(dataframe["tstamp"][middle])[0]
     month = data_to_date(dataframe["tstamp"][middle])[1]
     return calendar.month_abbr[month] + "_" + str(year)
