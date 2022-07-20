@@ -70,7 +70,7 @@ def Stars4all_app(start, final):
     def Create_Files():
         os.mkdir("/home/osoc22/Final")
         os.mkdir("/home/osoc22/Raw")
-
+    
     #This funtion transform the files created before to zip, so we can send them to zanodo more easelly
 
     def File_Zip(Filename):
@@ -99,9 +99,11 @@ def Stars4all_app(start, final):
 
     #calling of the funtion that downloads the data from the data_base, and send it to the paths
     work_flow(start, final,"/home/osoc22" ,"/home/osoc22/Raw")
+    print('Se genera los dataset raw')
     contenido = os.listdir('/home/osoc22/Raw')
     for i in contenido:
         stars4all_filtrado( i, "/home/osoc22/Final")
+    print('Se genera los dataset filtrado')
 
     #Calling of the funtion that transform the files to zips                                                                                
     File_Zip(name)                                             
@@ -114,10 +116,12 @@ def Stars4all_app(start, final):
     path_mensual = "/home/osoc22"  
 
     #Calling of the funtion that uploads the files to the zenodo account
-    UPload_files()                                                     
+    UPload_files() 
+    print('Calling of the funtion that uploads the files to the zenodo account')                                                    
 
     #calling of the funtion that daletes the files and the zips
-    Delete_files(name)  
+    Delete_files(name)
+    print('calling of the funtion that daletes the files and the zips')  
 
     #End of the funtion                                                                                                 
 
