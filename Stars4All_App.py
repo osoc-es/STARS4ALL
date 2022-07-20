@@ -117,7 +117,7 @@ def Stars4all_app(start, final):
     path_final = "/home/osoc22/Star4All-FinalData-%s.zip" % name
 
     #Creation of the path for the mensual CSV
-    path_mensual = "/home/osoc22/STRAS4ALL-%s.csv"  % name
+    path_mensual = "/home/osoc22/STARS4ALL-%s.csv"  % name
 
     #Calling of the funtion that uploads the files to the zenodo account
     UPload_files() 
