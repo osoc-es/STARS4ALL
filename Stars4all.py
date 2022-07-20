@@ -7,7 +7,7 @@ import pandas as pd
 import math
 
 from typing import List
-
+import sys
 
 
 
@@ -101,4 +101,7 @@ def filtrado(dataframe, PATH):
 def stars4all_filtrado(file, PATH):
     dataframe = pd.read_csv(file, delimiter=",")
     filtrado(dataframe, PATH)
+
+if __name__ == "__main__":
+    stars4all_filtrado(sys.argv[1], sys.argv[2])
 
