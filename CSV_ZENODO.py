@@ -41,7 +41,7 @@ def Upload_Zenodo(Token, Meta_Data, Path, Filename):
     data_new = Meta_Data    # Information needed for the documentation
     filename = Filename
     headers = {"Content-Type": "application/json"}
-    logging.basicConfig( filename = '/home/osoc22/STARS4ALL/logger/%s.txt' % filename, encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+    logging.basicConfig(format = '%(asctime)-5s %(name)-15s %(levelname)-8s %(message)s', level  = logging.DEBUG, filename = "/home/osoc22/STARS4ALL/logger/photometer.log", filemode = "a")
     r = requests.get('https://zenodo.org/api/deposit/depositions', params={'access_token': ACCESS_TOKEN})
     print(r.status_code)
     logging.info("API has been connected, Status 200")
