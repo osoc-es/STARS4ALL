@@ -21,7 +21,7 @@ from datetime import datetime
 def Stars4all_app(start, final):       
                                                      
     #This part creates a name out of the start time, so we can use it as title for the csv
-    date_time_obj = datetime.strptime(start , '%Y-%m-%dT%H:%M:%SZ')
+    date_time_obj = datetime.strptime(start ,'%Y-%m-%dT%H:%M:%SZ')
     name= date_time_obj.strftime('%Y-%B')                
                                    
     #variables used for uploading the files to zenodo 
@@ -35,7 +35,7 @@ def Stars4all_app(start, final):
     Title_Final = 'Stars4All_%s_Final' % name
     Title_Mensual = 'Stars4All_%s_Mensual' % name
     Description = 'Tester for Stars4All'
-    name = 'Daniel Moreno'
+    name_creator = 'Daniel Moreno'
     Affiliation = 'OSOC'
     Type = 'poster'
 
@@ -45,7 +45,7 @@ def Stars4all_app(start, final):
                 'title': Title_Row,
             'upload_type': Type,
             'description': Description,
-            'creators': [{'name': name,
+            'creators': [{'name': name_creator,
                         'affiliation': Affiliation}] } }
 
     meta_data_Final = {
@@ -53,14 +53,14 @@ def Stars4all_app(start, final):
                 'title': Title_Final,
             'upload_type': Type,
             'description': Description,
-            'creators': [{'name': name,
+            'creators': [{'name': name_creator,
                         'affiliation': Affiliation}] } }
     meta_data_Mensual = {
         'metadata': {
                 'title': Title_Mensual,
             'upload_type': Type,
             'description': Description,
-            'creators': [{'name': name,
+            'creators': [{'name': name_creator,
                         'affiliation': Affiliation}] } }
 
     #Declaration of the funtions that will be needed
@@ -110,7 +110,7 @@ def Stars4all_app(start, final):
     print('Se genera los dataset filtrado')
 
     #Calling of the funtion that transform the files to zips                                                                                
-    File_Zip(name)                                             
+    File_Zip(name )                                             
 
     #creation of the path to the zips created before
     path_row = "/home/osoc22/Star4All-RawData-%s.zip" % name        
