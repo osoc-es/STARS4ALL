@@ -21,7 +21,7 @@ from datetime import datetime
 def Stars4all_app(start, final):       
                                                      
     #This part creates a name out of the start time, so we can use it as title for the csv
-    date_time_obj = datetime.datetime.strptime(start , '%Y-%m-%dT%H:%M:%SZ')
+    date_time_obj = datetime.strptime(start , '%Y-%m-%dT%H:%M:%SZ')
     name= date_time_obj.strftime('%Y-%B')                
                                    
     #variables used for uploading the files to zenodo 
