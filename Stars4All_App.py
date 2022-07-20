@@ -25,24 +25,24 @@ def Stars4all_app(start, final):
     name= date_time_obj.strftime('%Y-%B')                
                                    
     #variables used for uploading the files to zenodo 
-    Access_Token = 'ozd6VtnQ7KLXheLIlCK6s8m1nf1RLYt9ebPgLXKgojxd2li52AHexYASMeQ3'          
-    Filename_Row = 'stars4all-Row-%s' % name
-    Filename_Final = 'stars4all-Final-%s' % name
-    Filename_Mensual = 'stars4all-mensual-%s' % name
+    Access_Token = 'y87XNFfmcYaGavtqRg119DXg78qxKzVyHqVlqHR4ckdDUiFlaUCrJza3pMml'          
+    Filename_Row = 'STAR4ALL-Row-%s' % name
+    Filename_Final = 'STAR4ALL-Final-%s' % name
+    Filename_Mensual = 'STAR4ALL-mensual-%s' % name
 
     #variables needed for the mata_data cration later on
-    Title_Row = 'Stars4All_%s_Row' % name                                               
-    Title_Final = 'Stars4All_%s_Final' % name
-    Title_Mensual = 'Stars4All_%s_Mensual' % name
+    Title_Row = 'STAR4ALL_%s_Row' % name                                               
+    Title_Final = 'STAR4ALL_%s_Final' % name
+    Title_Mensual = 'STAR4ALL_%s_Mensual' % name
     Description = 'Tester for Stars4All'
-    name_creator = 'Daniel Moreno'
-    Affiliation = 'OSOC'
+    name_creator = 'STARS4ALL'
+    Affiliation = 'STARS4ALL'
     Type = 'poster'
 
     #Meta_data for every uploading file at zenodo
     meta_data_Row = {                                                                   
         'metadata': {
-                'title': Title_Row,
+            'title': Title_Row,
             'upload_type': Type,
             'description': Description,
             'creators': [{'name': name_creator,
