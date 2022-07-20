@@ -93,7 +93,6 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
 '# This data is released under the following license: ODbL 1.0 http://opendatacommons.org/licenses/odbl/summary/',
 '# Device type: SQM-LE',
 '# Instrument ID: Dahlem_tower_le',
-#Aquí abajo añadimos a la cabecera la información correspondiente a su usuario en la Api
 '# Data supplier: '+ test+',https://api.stars4all.eu/photometers'
 '# Location name: '+country+'-'+region+'-'+ town+'-'+place,
 '# Position (lat, lon, elev(m)):'+str(latitude)+','+str(longitude) ,
@@ -173,7 +172,7 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
         name1= str(name)+str(j)
         csv_generator(db_access(hostdb ,portdb,usernamedb,passworddb,database,inicio,fin,j),name1,j,dict,path1)
 
-    f2= open(path2 + 'STARS4ALL-'+str(name)+'-'+ str('.csv'), "w") #Creamos el archivo y añadimos las cabeceras
+    f2= open(path2 + 'STARS4ALL-'+str(name)+ str('.csv'), "w") #Creamos el archivo y añadimos las cabeceras
     f2.write('name , tamb , tsky , mag , tstamp , latitude , longitude'+'\n')
     f2.close()
     for j in usuarios:
