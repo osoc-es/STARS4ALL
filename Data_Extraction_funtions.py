@@ -133,7 +133,6 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
             keys=['name','tamb','tsky','mag','time']
             for i in data:
                 for count in i:
-                    print(count)
                     writer.writerow([count[k]for k in keys])
                     print([count[k]for k in keys])
                     
