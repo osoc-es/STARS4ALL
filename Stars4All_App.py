@@ -125,8 +125,10 @@ def Stars4all_app(start, final):
 #This part allows us to choose if we want to Call the funtion automatic or manual, 
 # in case it doesnt work automatic
 
-if(len(sys.argv) == 3):
-    Stars4all_app(sys.argv[1], sys.argv[2])
-else:
-    final_automatic , start_automatic = date_automathic()
-    Stars4all_app(start_automatic, final_automatic)
+if __name__ == "__main__":
+
+    if(len(sys.argv) == 3):
+        Stars4all_app(sys.argv[1], sys.argv[2])
+    else:
+        final_automatic , start_automatic = date_automathic()
+        Stars4all_app(start_automatic, final_automatic)
