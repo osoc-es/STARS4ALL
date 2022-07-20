@@ -102,6 +102,7 @@ def Stars4all_app(start, final):
     work_flow(start, final,"/home/osoc22/Raw/" ,"/home/osoc22/")
     print('Se genera los dataset raw')
     contenido = os.listdir('/home/osoc22/Raw')
+    print(contenido)
     for i in contenido:
         print(i)
         stars4all_filtrado( i, "/home/osoc22/Final")
