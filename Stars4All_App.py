@@ -96,7 +96,7 @@ def Stars4all_app(start, final):
         remove("/home/osoc22/%s.csv" % name)
 
     #Calling of the funtion that creates the files for the CSV
-    #create_Files()                       
+    Create_Files()                       
 
     #calling of the funtion that downloads the data from the data_base, and send it to the paths
     work_flow(start, final,"/home/osoc22/Raw/" ,"/home/osoc22/")
