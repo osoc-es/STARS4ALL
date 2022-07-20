@@ -8,8 +8,7 @@ import math
 
 from typing import List
 
-antes = datetime.now()
-dataframe = pd.read_csv("stars4all-july-2020.csv", delimiter=',')
+
 
 
 def data_to_date(time: str) -> tuple:
@@ -97,7 +96,7 @@ def filtrado(dataframe, PATH):
 
     dataframe_nuevo = dataframe.drop(lista)
     print(len(dataframe_nuevo))
-    dataframe_nuevo.to_csv(f"{PATH}Stars4all2{month(dataframe)}.csv", index=False)
+    dataframe_nuevo.to_csv(f"{PATH}Stars4all-filter{month(dataframe)}.csv", index=False)
 
 def stars4all_filtrado(file, PATH):
     dataframe = pd.read_csv(file, delimiter=",")
