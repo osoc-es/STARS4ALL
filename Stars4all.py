@@ -89,9 +89,7 @@ def filtrado(dataframe, PATH):
     lista: List[int] = []
 
     for i in range(len(dataframe)):
-        if dataframe['tamb'][i] is None or dataframe['tsky'][i] is None or dataframe['mag'][i] is None or dataframe['mag'][i] is None or dataframe['tstamp'][i] is None or dataframe['latitude'][i] is None or dataframe['longitude'][i] is None:
-            lista.append(i)
-        elif sun_elevation(dataframe, i) > -18 or moon_altitude(dataframe, i)[0] != "-" or not clear_sky(dataframe, i):
+        if sun_elevation(dataframe, i) > -18 or moon_altitude(dataframe, i)[0] != "-" or not clear_sky(dataframe, i):
             lista.append(i)
 
     dataframe_nuevo = dataframe.drop(lista)
