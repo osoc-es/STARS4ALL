@@ -17,7 +17,7 @@ def stars4all_filtrado(file, PATH):
     def cord(file):
         with open(file, 'r') as fp:
 
-            x = fp.readlines()[8]
+            x = fp.readlines()[7]
             pre_cord = re.split(":", x)[1]
             cord= re.split(",", pre_cord)
             lat= cord[0]
@@ -128,15 +128,11 @@ def stars4all_filtrado(file, PATH):
    
     headers=headers(file) 
 
-    print(headers)
 
     dataframe = pd.read_csv(file, delimiter=",",skiprows=33)
 
     filtrado(dataframe, PATH,lat,long,headers)
    
-    
 
-stars4all_filtrado('CSV-FILTER.csv','C:\\Users\\User\\OneDrive\\Documentos\\Agenda\\')
-
-#if __name__ == "__main__":
-#    stars4all_filtrado(sys.argv[1], sys.argv[2])
+if __name__ == "__main__":
+    stars4all_filtrado(sys.argv[1], sys.argv[2])
