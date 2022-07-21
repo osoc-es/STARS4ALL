@@ -31,10 +31,10 @@ def stars4all_filtrado(file, PATH):
         lines = f.readlines()
         f.close()
         f = open(file,"w")
-        for line in lines[35:-1]:
+        for line in lines[34:-1]:
             f.write(line)
         f.close()
-        return(lines[0:34])
+        return(lines[0:33])
 
     def add_headers(file,row):
         with open(file, 'r') as readFile:
