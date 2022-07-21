@@ -113,7 +113,6 @@ def Upload_Zenodo(Token, Meta_Data, Path, Filename):
             raise exception("There has been an error at publising the file")
 
 
-    
     #Execution of the funtions.
     try:
 
