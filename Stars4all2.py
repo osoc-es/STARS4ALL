@@ -135,5 +135,5 @@ def stars4all_filtrado(file, PATH):
     filtrado(dataframe, PATH,lat,long,headers)
    
 
-#if __name__ == "__main__":
-#    stars4all_filtrado(sys.argv[1], sys.argv[2])
+if __name__ == "__main__":
+    stars4all_filtrado(sys.argv[1], sys.argv[2])
