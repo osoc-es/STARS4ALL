@@ -18,7 +18,7 @@ def stars4all_filtrado(file, PATH):
     def cord(file):
         with open(file, 'r') as fp:
 
-            x = fp.readlines()[8]
+            x = fp.readlines()[7]
             pre_cord = re.split(":", x)[1]
             cord= re.split(",", pre_cord)
             lat= cord[0]
