@@ -134,7 +134,6 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
             for i in data:
                 for count in i:
                     writer.writerow([count[k]for k in keys])
-                    print([count[k]for k in keys])
                     
     def csv_generator2(data,name,dict,path): #Los datos deben ser de todos los usuarios(data)    
         
