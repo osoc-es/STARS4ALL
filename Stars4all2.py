@@ -33,7 +33,7 @@ def stars4all_filtrado(file, PATH):
         f = open(file,"w")
         for line in lines[33:-1]:
             f.write(line)
-        print(f)
+        print(lines[33])
         f.close()
         return(lines[0:32])
 
