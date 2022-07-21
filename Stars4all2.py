@@ -148,9 +148,7 @@ def stars4all_filtrado(file, PATH):
     filtrado(dataframe, PATH,lat,long)
    
     add_headers(f"{PATH}STAR4ALL-{month(dataframe)}-FILTER.csv",headers)
-    
 
-stars4all_filtrado('CSV-FILTER.csv','C:\\Users\\User\\OneDrive\\Documentos\\Agenda\\')
 
 if __name__ == "__main__":
     stars4all_filtrado(sys.argv[1], sys.argv[2])
