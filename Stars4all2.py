@@ -29,13 +29,11 @@ def stars4all_filtrado(file, PATH):
 
         f = open(file,"r")
         lines = f.readlines()
-        print(lines[33:34])
         f.close()
         f = open(file,"w")
-        lines[33]=lines[33]+'\n'
         for line in lines[33:-1]:
-            print(line)
             f.write(line)
+        print(lines[33:34])
         print(lines[33])
         f.close()
         return(lines[0:32])
@@ -126,7 +124,6 @@ def stars4all_filtrado(file, PATH):
 
     def month(dataframe):
         middle = len(dataframe) // 2
-        print(dataframe["tstamp"][middle][0:19])
         date_time_obj = datetime.strptime(dataframe["tstamp"][middle][0:19] , '%Y-%m-%dT%H:%M:%S')
         name= date_time_obj.strftime('%Y-%B')
         return name
