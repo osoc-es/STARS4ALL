@@ -29,7 +29,6 @@ def stars4all_filtrado(file, PATH):
             rd = csv.reader(readFile)
             lines_2 = list(rd)[3]
             lines = list(rd)[0:32]
-            print(list(rd)[33])
         print(lines_2)
         return(lines)
         
