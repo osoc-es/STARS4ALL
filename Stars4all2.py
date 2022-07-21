@@ -25,20 +25,6 @@ def stars4all_filtrado(file, PATH):
             lon=cord[1]
         return(float(lat),float(lon))
 
-    def delete_headers(file):
-
-        f = open(file,"r")
-        lines = f.readlines()
-        print(lines[33:34])
-        f.close()
-        f = open(file,"w")
-        lines[33]=lines[33]+'\n'
-        for line in lines[33:-1]:
-            print(line)
-            f.write(line)
-        print(lines[33])
-        f.close()
-        return(lines[0:32])
 
     def add_headers(file,row):
         with open(file, 'r') as readFile:
@@ -126,7 +112,6 @@ def stars4all_filtrado(file, PATH):
 
     def month(dataframe):
         middle = len(dataframe) // 2
-        print(dataframe["tstamp"][middle][0:19])
         date_time_obj = datetime.strptime(dataframe["tstamp"][middle][0:19] , '%Y-%m-%dT%H:%M:%S')
         name= date_time_obj.strftime('%Y-%B')
         return name
@@ -145,13 +130,11 @@ def stars4all_filtrado(file, PATH):
         dataframe_nuevo.to_csv(f"{PATH}STAR4ALL-{month(dataframe)}-FILTER.csv", index=False)
 
     lat , long = cord(file)
-    headers=delete_headers(file)
 
-    dataframe = pd.read_csv(file, delimiter=",")
+    dataframe = pd.read_csv(file, delimiter=",",skiprows=33)
 
     filtrado(dataframe, PATH,lat,long)
    
-    add_headers(f"{PATH}STAR4ALL-{month(dataframe)}-FILTER.csv",headers)
 
 
 if __name__ == "__main__":
