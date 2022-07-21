@@ -126,7 +126,7 @@ def work_flow(inicio,fin,path1,path2):#Path1 es donde se genera el documento con
         f=  open(path + 'STARS4ALL'+str(name)+str('.csv'), mode='w') #Creamos el archivo y añadimos las cabeceras
         for i in headers:
             f.write(i +'\n')
-        f.write('name,tamb,tsky,mag,tstamps')
+        f.write('name,tamb,tsky,mag,tstamps\n')
         f.close()
         with open(path + 'STARS4ALL'+str(name)+str('.csv'), mode='a',newline= '') as File: #Añadimos los parametros 
             writer = csv.writer(File)    
