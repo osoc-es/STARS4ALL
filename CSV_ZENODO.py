@@ -100,6 +100,7 @@ def Upload_Zenodo(Token, Meta_Data, Path, Filename):
     
     #And finally the funtion Publish_File publish 
     # the file stored at the users account.
+
     
     def Publish_File(Id):
         r = requests.post('https://zenodo.org/api/deposit/depositions/%s/actions/publish' % Id,
@@ -111,6 +112,7 @@ def Upload_Zenodo(Token, Meta_Data, Path, Filename):
             logging.info("Error at publising file")
             raise exception("There has been an error at publising the file")
 
+
     
     #Execution of the funtions.
     try:
@@ -121,11 +123,15 @@ def Upload_Zenodo(Token, Meta_Data, Path, Filename):
 
         bucket_url = p.json()["links"]["bucket"]    #URL used to access the API file receptor.
 
+        logging.debug("Creating file :"+filename)
+        
         Create_file(filename)                       #We create the file
  
+        logging.debug()    
+
         Edit_File(deposition_id, data_new)          #we edit the file
 
-        Publish_File(deposition_id)                #we publish the file
+        #Publish_File(deposition_id)                #we publish the file
 
         logging.info("File upload to Zenodo successfully")
 

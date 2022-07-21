@@ -101,11 +101,11 @@ def Stars4all_app(start, final):
     #calling of the funtion that downloads the data from the data_base, and send it to the paths
     work_flow(start, final,"/home/osoc22/Raw/" ,"/home/osoc22/")
     print('Se genera los dataset raw')
-    #contenido = os.listdir('/home/osoc22/Raw')
+    contenido = os.listdir('/home/osoc22/Raw')
     #print(contenido)
-    #for i in contenido:
+    for i in contenido:
         #print(i)
-        #stars4all_filtrado('/home/osoc22/Raw/'+ i, "/home/osoc22/Final")
+        stars4all_filtrado('/home/osoc22/Raw/'+ i, "/home/osoc22/Final")
     stars4all_filtrado('/home/osoc22/'+'STARS4ALL-'+ name +'.csv', '/home/osoc22/Final')    
     print('Se genera los dataset filtrado')
 
