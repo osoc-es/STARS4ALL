@@ -1,10 +1,9 @@
-import datetime
-
 import pandas as pd
 import Stars4all
 
-#para recoger estos datos es necesario que el dataframe haya sido filtrado
-#para ello se debe pasar antes por el script que se encarga de realizar la función
+
+# para recoger estos datos es necesario que el dataframe haya sido filtrado
+# para ello se debe pasar antes por el script que se encarga de realizar la función
 
 def datos_mes(dataframe):
     fecha = (Stars4all.data_to_date(dataframe['tstamp'][1])[0], Stars4all.data_to_date(dataframe['tstamp'][1])[1],
@@ -31,31 +30,31 @@ def datos_mes(dataframe):
             drop = []
             cambio_de_fecha = i
             fotometro.append(df_dia1)
-            # df_dia1 = dataframe
-        if i % 10000 == 0:
-            print(i)
         previous_name = dataframe['name'][i]
     return mes
 
 
 def datos_series(dataframe):
-    lista_datos = []
-    j = 0
+    data = pd.DataFrame(columns=['name', 'date', 'count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'])
+    count = 0
     for k in datos_mes(dataframe):
-        j += len(k)
         for i in k:
-            fecha_fotometro = datetime.date(Stars4all.data_to_date(i['tstamp'][j - 1])[0],
-                                            Stars4all.data_to_date(i['tstamp'][j - 1])[1],
-                                            Stars4all.data_to_date(i['tstamp'][j - 1])[2])
-            nombre_fotometro = dataframe['name'][j - 1]
+            count += len(i)
+            fecha_fotometro = (
+                Stars4all.data_to_date(i['tstamp'][count - 1])[0], Stars4all.data_to_date(i['tstamp'][count - 1])[1],
+                Stars4all.data_to_date(i['tstamp'][count - 1])[2])
+            nombre_fotometro = i['name'][count - 1]
             serie_estadisticas = i['mag'].describe()
-            serie_nombre_fecha = pd.Series([nombre_fotometro, fecha_fotometro], index=['name', 'time'])
+            serie_nombre_fecha = pd.Series([nombre_fotometro, fecha_fotometro], index=['name', 'date'])
             serie_fotometro_dia = pd.concat([serie_nombre_fecha, serie_estadisticas])
-            lista_datos.append(serie_fotometro_dia.to_dict())
-    return lista_datos
+            dataframe_serie_fotometro_dia = pd.DataFrame([serie_fotometro_dia])
+            data = pd.concat([data, dataframe_serie_fotometro_dia])
+            data.reset_index(drop=True, inplace=True)
+    data = data.to_json(orient= 'table')
+    return data
+
 
 def stats(file):
-    dataframe_filtrado = pd.read_csv(file, delimiter=',')
-    return datos_series(dataframe_filtrado)
-
+    dataframe_filtrados = pd.read_csv(file, delimiter=',')
+    return datos_series(dataframe_filtrados)
 
