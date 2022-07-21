@@ -128,7 +128,6 @@ def stars4all_filtrado(file, PATH):
    
     headers=headers(file) 
 
-    print(headers)
 
     dataframe = pd.read_csv(file, delimiter=",",skiprows=33)
 
