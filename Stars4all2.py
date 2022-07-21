@@ -28,7 +28,7 @@ def stars4all_filtrado(file, PATH):
         with open(file, 'r') as readFile:
             rd = csv.reader(readFile)
             lines = list(rd)[0:32]
-
+        print(lines[-1])
         return(lines)
         
 
@@ -130,7 +130,7 @@ def stars4all_filtrado(file, PATH):
 
     print(headers)
 
-    dataframe = pd.read_csv(file, delimiter=",",skiprows=35)
+    dataframe = pd.read_csv(file, delimiter=",",skiprows=33)
 
     filtrado(dataframe, PATH,lat,long,headers)
    
