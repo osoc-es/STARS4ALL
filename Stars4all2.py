@@ -27,9 +27,10 @@ def stars4all_filtrado(file, PATH):
     def headers(file):
         with open(file, 'r') as readFile:
             rd = csv.reader(readFile)
+            lines_2 = list(rd)[3]
             lines = list(rd)[0:32]
             print(list(rd)[33])
-        print(lines[-1])
+        print(lines_2)
         return(lines)
         
 
