@@ -1,5 +1,5 @@
+
 import calendar
-import csv
 from datetime import datetime
 
 import ephem
@@ -10,38 +10,27 @@ import math
 from typing import List
 import sys
 import re
-
-
+import csv
 
 def stars4all_filtrado(file, PATH):
 
     def cord(file):
         with open(file, 'r') as fp:
 
-            x = fp.readlines()[7]
+            x = fp.readlines()[8]
             pre_cord = re.split(":", x)[1]
             cord= re.split(",", pre_cord)
             lat= cord[0]
             lon=cord[1]
         return(float(lat),float(lon))
 
-
-    def add_headers(file,row):
+    def headers(file):
         with open(file, 'r') as readFile:
             rd = csv.reader(readFile)
-            lines = list(rd)
-
-        f=  open(file, mode='w') #Creamos el archivo y añadimos las cabeceras
-        for i in row:
-            f.write(i)
-        f.close()
+            lines = list(rd)[0:32]
+        print(lines[-1])
+        return(lines)
         
-        with open(file, 'a',newline='') as writeFile:
-            wt = csv.writer(writeFile)
-            wt.writerows(lines)
-
-        readFile.close()
-        writeFile.close()
 
     def data_to_date(time: str) -> tuple:
         date_string = ""
@@ -112,12 +101,13 @@ def stars4all_filtrado(file, PATH):
 
     def month(dataframe):
         middle = len(dataframe) // 2
+        print(dataframe["tstamp"][middle][0:19])
         date_time_obj = datetime.strptime(dataframe["tstamp"][middle][0:19] , '%Y-%m-%dT%H:%M:%S')
         name= date_time_obj.strftime('%Y-%B')
         return name
 
 
-    def filtrado(dataframe, PATH,lat,long):
+    def filtrado(dataframe, PATH,lat,long,headers):
         lista: List[int] = []
 
         for i in range(len(dataframe)):
@@ -127,15 +117,26 @@ def stars4all_filtrado(file, PATH):
         dataframe_nuevo = dataframe.drop(lista)
         print(len(dataframe_nuevo))
 
-        dataframe_nuevo.to_csv(f"{PATH}STAR4ALL-{month(dataframe)}-FILTER.csv", index=False)
+        f=  open(f"{PATH}STAR4ALL-{month(dataframe)}-FILTER.csv", mode='w') #Creamos el archivo y añadimos las cabeceras
+        for i in headers:
+            f.write((i)[0]+'\n')
+        f.close()
+
+        dataframe_nuevo.to_csv(f"{PATH}STAR4ALL-{month(dataframe)}-FILTER.csv",mode='a', index=False)
 
     lat , long = cord(file)
+   
+    headers=headers(file) 
+
+    print(headers)
 
     dataframe = pd.read_csv(file, delimiter=",",skiprows=33)
 
-    filtrado(dataframe, PATH,lat,long)
+    filtrado(dataframe, PATH,lat,long,headers)
    
+    
 
+stars4all_filtrado('CSV-FILTER.csv','C:\\Users\\User\\OneDrive\\Documentos\\Agenda\\')
 
-if __name__ == "__main__":
-    stars4all_filtrado(sys.argv[1], sys.argv[2])
+#if __name__ == "__main__":
+#    stars4all_filtrado(sys.argv[1], sys.argv[2])
