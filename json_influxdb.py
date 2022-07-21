@@ -37,4 +37,4 @@ def Json_influxdb(list, database):
 
         client.write_points(list)
 
-Json_influxdb(,"testdb")
+Json_influxdb("testdb")
