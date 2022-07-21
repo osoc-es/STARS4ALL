@@ -7,9 +7,8 @@ import pandas as pd
 import math
 
 from typing import List
+import sys
 
-antes = datetime.now()
-dataframe = pd.read_csv("stars4all-july-2020.csv", delimiter=',')
 
 
 def data_to_date(time: str) -> tuple:
@@ -80,7 +79,7 @@ def moon_altitude(dataframe, i):
 
 
 def month(dataframe):
-    middle = len(dataframe) / 2
+    middle = len(dataframe) // 2
     year = data_to_date(dataframe["tstamp"][middle])[0]
     month = data_to_date(dataframe["tstamp"][middle])[1]
     return calendar.month_abbr[month] + "_" + str(year)
@@ -90,16 +89,17 @@ def filtrado(dataframe, PATH):
     lista: List[int] = []
 
     for i in range(len(dataframe)):
-        if dataframe['name'][i] is None or dataframe['tamb'][i] is None or dataframe['tsky'][i] is None or dataframe['mag'][i] is None or dataframe['mag'][i] is None or dataframe['tstamp'][i] is None or dataframe['latitude'][i] is None or dataframe['longitude'][i] is None:
-            lista.append(i)
-        elif sun_elevation(dataframe, i) > -18 or moon_altitude(dataframe, i)[0] != "-" or not clear_sky(dataframe, i):
+        if sun_elevation(dataframe, i) > -18 or moon_altitude(dataframe, i)[0] != "-" or not clear_sky(dataframe, i):
             lista.append(i)
 
     dataframe_nuevo = dataframe.drop(lista)
     print(len(dataframe_nuevo))
-    dataframe_nuevo.to_csv(f"{PATH}Stars4all2{month(dataframe)}.csv", index=False)
+    dataframe_nuevo.to_csv(f"{PATH}Stars4all-filter{month(dataframe)}.csv", index=False)
 
 def stars4all_filtrado(file, PATH):
     dataframe = pd.read_csv(file, delimiter=",")
     filtrado(dataframe, PATH)
+
+if __name__ == "__main__":
+    stars4all_filtrado(sys.argv[1], sys.argv[2])
 
