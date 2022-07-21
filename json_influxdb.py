@@ -11,15 +11,16 @@ def Json_influxdb(list, database):
     client = InfluxDBClient('localhost', 8086)  #server at the localhost of influxdb
     client.switch_database(database)            #conection  to the database
 
+
     for i in list:                              #for loup that sends the data to influx
 
         json_payload = []   
 
         data = {"measurement" : "stadistics", 
             'tags': {
-                "name" : i["Name"],
+                "name" : i["name"],
                 },
-            "time": i["time"],
+            "time": i["date"],
             "fields": {
                 "count" : i["count"],
                 "mean" : i["mean"],
@@ -34,4 +35,6 @@ def Json_influxdb(list, database):
 
         json_payload.append(data)
 
-        client.write_points(json_payload)
+        client.write_points(list)
+
+Json_influxdb(,"testdb")
