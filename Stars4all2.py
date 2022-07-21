@@ -29,9 +29,11 @@ def stars4all_filtrado(file, PATH):
 
         f = open(file,"r")
         lines = f.readlines()
+        print(lines[33:34])
         f.close()
         f = open(file,"w")
         for line in lines[33:-1]:
+            print(line)
             f.write(line)
         print(lines[33])
         f.close()
