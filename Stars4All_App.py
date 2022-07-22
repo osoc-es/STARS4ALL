@@ -11,6 +11,7 @@ from Data_Extraction_funtions import work_flow
 from Data_Extraction_funtions import date_automathic
 import sys
 from Stars4all import stars4all_filtrado
+from Stars4all2 import stars4all_filtrado2
 from datetime import datetime
 
 
@@ -105,7 +106,7 @@ def Stars4all_app(start, final):
     #print(contenido)
     for i in contenido:
         #print(i)
-        stars4all_filtrado('/home/osoc22/Raw/'+ i, "/home/osoc22/Final")
+        stars4all_filtrado2('/home/osoc22/Raw/'+ i, "/home/osoc22/Final")
     stars4all_filtrado('/home/osoc22/'+'STARS4ALL-'+ name +'.csv', '/home/osoc22/Final')    
     print('Se genera los dataset filtrado')
 

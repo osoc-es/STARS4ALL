@@ -12,7 +12,7 @@ import sys
 import re
 import csv
 
-def stars4all_filtrado(file, PATH):
+def stars4all_filtrado2(file, PATH):
 
     def cord(file):
         with open(file, 'r') as fp:
@@ -136,4 +136,4 @@ def stars4all_filtrado(file, PATH):
    
 
 if __name__ == "__main__":
-    stars4all_filtrado(sys.argv[1], sys.argv[2])
+    stars4all_filtrado2(sys.argv[1], sys.argv[2])
