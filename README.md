@@ -2,13 +2,12 @@
 
 REQUIRMENTS 
 
-```Python 3.8.10```
-
-```pip 20.0.2```
-
-```ubuntu linux 20.04```
-
-```windows 10 pro ```
+```
+Python 3.8.10
+pip 20.0.2
+ubuntu linux 20.04
+windows 10 pro 
+```
 
 GETTING STARTED 
 
@@ -64,3 +63,10 @@ The format standar date is : 'year-month-dayT-hour-minute-seconds' ( e.g 2020-04
 A full example of a this process is :
 
 ```-python3 Stars4All_App.py  '2020-04-10T08:50:53'      '2020-05-10T08:50:532'```
+
+If you need all the data since the begining of the datasets we use the file dates_records.py ,this file create a list of dates between 2 dates , with all the standarized dates per month.
+
+```-python3 dates_records.py  '2020-01-10T08:50:53'  '2020-08-10T08:50:532'```
+
+
+
