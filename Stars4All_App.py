@@ -104,9 +104,9 @@ def Stars4all_app(start, final):
     print('Se genera los dataset raw')
     contenido = os.listdir('/home/osoc22/Raw')
     #print(contenido)
-    for i in contenido:
+    #for i in contenido:
         #print(i)
-        stars4all_filtrado2('/home/osoc22/Raw/'+ i, "/home/osoc22/Final")
+        #stars4all_filtrado2('/home/osoc22/Raw/'+ i, "/home/osoc22/Final")
     stars4all_filtrado('/home/osoc22/'+'STARS4ALL-'+ name +'.csv', '/home/osoc22/Final')    
     print('Se genera los dataset filtrado')
 
