@@ -1,6 +1,7 @@
 from datetime import date
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
+import sys
 
 def date_list(inicio,fin):
     list_dates=[]
@@ -11,4 +12,6 @@ def date_list(inicio,fin):
         list_dates.append(date_inicio.strftime('%Y-%m-%dT%H:%M:%SZ'))
     return(list_dates)
 
-print(date_list('2016-08-01T00:00:00Z','2022-06-01T00:00:00Z'))
+if __name__ == "__main__":
+
+        date_list(sys.argv[1], sys.argv[2])
