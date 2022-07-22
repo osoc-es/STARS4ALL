@@ -26,7 +26,7 @@ def Stars4all_app(start, final):
     name= date_time_obj.strftime('%Y-%B')                
                                    
     #variables used for uploading the files to zenodo 
-    Access_Token = 'G1r9MZwArHzaAZpMMp1HhRaBWQfY3U6sXZPP6728jC776jNfQaYP8Nd2M0QV'          
+    Access_Token = 'imK1ZC9fClbu94wkX5LFPqYUJIJ7Zi9XycOm8iAOtrqljLotZZToqUqshK6i'          
     Filename_Row = 'STAR4ALL-Row-%s' % name
     Filename_Final = 'STAR4ALL-Final-%s' % name
     Filename_Mensual = 'STARS4ALL-%s.csv' % name
