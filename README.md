@@ -2,13 +2,13 @@
 
 REQUIRMENTS 
 
-Python 3.8.10
+```Python 3.8.10```
 
-pip 20.0.2
+```pip 20.0.2```
 
-ubuntu linux 20.04
+```ubuntu linux 20.04```
 
-windows 10 pro
+```windows 10 pro ```
 
 GETTING STARTED 
 
